@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed": "tsx scripts/seed.ts"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -17,7 +18,9 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
+    "@types/pg": "^8.11.0",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
