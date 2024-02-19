@@ -9,7 +9,7 @@ export async function GET(req: Request) {
   let notesRes = null;
   if (parent_id) {
     notesRes = await sql(
-      "select * from notes where parent_id = $1 and user_id = $2 order by title asc",
+      "select * from notes where user_id = $2 and parent_id = $1 order by title asc",
       [parent_id, user.id]
     );
   } else {
@@ -25,6 +25,7 @@ export async function GET(req: Request) {
     "select parent_id, count(*)::int from notes where parent_id = any($1) group by parent_id",
     [ids]
   );
+
   const childNoteCountMap = childNotesRes.rows.reduce((map, row) => {
     map[row.parent_id] = row.count;
     return map;
@@ -32,9 +33,9 @@ export async function GET(req: Request) {
 
   notesRes.rows.forEach((row) => {
     if (childNoteCountMap.hasOwnProperty(row.id)) {
-      row.childCount = childNoteCountMap[row.id];
+      row.child_count = childNoteCountMap[row.id];
     } else {
-      row.childCount = 0;
+      row.child_count = 0;
     }
   });
 

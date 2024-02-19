@@ -12,6 +12,7 @@ const NoteContainer = () => {
   useEffect(() => {
     async function init() {
       const notes = await fetchNotes();
+      console.log(notes);
       dispatch({ type: "SET_ROOT_NOTES", payload: notes });
     }
     init();

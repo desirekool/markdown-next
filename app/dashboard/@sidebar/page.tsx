@@ -1,9 +1,7 @@
 import { getCurrentUser } from "@/app/lib/server/auth";
-import NoteContainer from "@/app/ui/note-container";
+import NoteContainer from "@/app/ui/NoteContainer";
 
-type Props = {};
-
-const page = async (props: Props) => {
+const Page = async () => {
   const user = await getCurrentUser();
 
   return (
@@ -16,4 +14,4 @@ const page = async (props: Props) => {
   );
 };
 
-export default page;
+export default Page;

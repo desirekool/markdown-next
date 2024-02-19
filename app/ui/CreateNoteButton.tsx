@@ -11,10 +11,9 @@ const CreateNoteButton = () => {
   return (
     <button
       onClick={handleClick}
-      className="text-white block bg-red-700 p-2 m-2"
+      className="text-white block bg-red-700 p-2 my-2"
     >
-      {" "}
-      Create Note{" "}
+      Create Note
     </button>
   );
 };

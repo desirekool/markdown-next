@@ -1,4 +1,5 @@
 import { DateTime } from "luxon";
+import { NoteData } from "./types";
 
 export const fetchNotes = async (parentId?: string) => {
   let QueryString = "";
@@ -8,6 +9,9 @@ export const fetchNotes = async (parentId?: string) => {
 
   const res = await fetch("/api/notes" + QueryString);
   const notes = await res.json();
+
+  console.log(notes);
+
   const transformedNotes = notes.map((note: any) => {
     return transformJsonToNote(note);
   });
@@ -31,6 +35,24 @@ export const updateParent = async (noteId: string, parentId: string) => {
     },
     body: JSON.stringify({ parent_id: parentId }),
   });
+}
+
+export const fetchNote = async (noteId: string) => {
+  const res = await fetch(`/api/notes/${noteId}`);
+  const note = await res.json();
+  return transformJsonToNote(note);
+}
+
+export const updateNote = async (note: NoteData) => {
+  const res = await fetch(`/api/notes/${note.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(note),
+  });
+  const updatedNote = await res.json();
+  return transformJsonToNote(updatedNote);
 }
 
 const transformJsonToNote = (note: any) => {
